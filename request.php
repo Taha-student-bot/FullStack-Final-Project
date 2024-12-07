@@ -1,79 +1,30 @@
 
 <?php
-// $prompt = $_GET['prompt'];
-// $apiKey = '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';
-// $apiUrl = 'https://api.openai.com/v1/chat/completions';
 
-// $data = [
-//     'model' => 'gpt-3.5-turbo',
-//     'messages' => [
-//         ['role' => 'system', 'content' => 'You are a helpful assistant.'],
-//         ['role' => 'user', 'content' => $prompt],
-//     ],
-//     'temperature' => 0.7,
-//     'top_p' => 1,
-//     'frequency_penalty' => 0,
-//     'presence_penalty' => 0,
-// ];
+header('Content-Type: application/json');
 
-// $ch = curl_init($apiUrl);
-// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-// curl_setopt($ch, CURLOPT_POST, true);
-// curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-// curl_setopt($ch, CURLOPT_HTTPHEADER, [
-//     'Content-Type: application/json',
-//     'Authorization: Bearer ' . $apiKey,
-// ]);
+$keyServerUrl = 'https://trophyexpresstransports.com/request-key.php';
 
-// $response = curl_exec($ch);
-// curl_close($ch);
+$prompt = $_GET['prompt'] ?? null;
 
-// var_dump(json_decode($response, true));
+if (!$prompt) {
+    http_response_code(400); 
+    echo json_encode(['error' => 'Prompt is required']);
+    exit;
+}
 
+$secretToken = 'aKb0eZSU5g3JGCLSzbMrO';
 
-$prompt = $_GET['prompt'];
-$apiKey = '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';
-$apiUrl = 'https://api.openai.com/v1/chat/completions';
+$requestUrl = $keyServerUrl . '?token=' . urlencode($secretToken) . '&prompt=' . urlencode($prompt);
 
-$data = [
-    'model' => 'gpt-3.5-turbo',
-    'messages' => [
-        ['role' => 'system', 'content' => 'You are a helpful assistant.'],
-        ['role' => 'user', 'content' => $prompt],
-    ],
-    'temperature' => 0.7,
-    'top_p' => 1,
-    'frequency_penalty' => 0,
-    'presence_penalty' => 0,
-];
+$response = file_get_contents($requestUrl);
 
-$ch = curl_init($apiUrl);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Content-Type: application/json',
-    'Authorization: Bearer ' . $apiKey,
-]);
-
-$response = curl_exec($ch);
-$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-curl_close($ch);
+if ($response === false) {
+    http_response_code(500); 
+    echo json_encode(['error' => 'Failed to retrieve data from the secure server']);
+    exit;
+}
 
 echo $response;
-file_put_contents('response.log', $response);
-
-
-if ($httpCode == 200) {
-    // Output the response as valid JSON
-    header('Content-Type: application/json');
-    echo $response;
-} else {
-    // Return an error response as JSON
-    header('Content-Type: application/json');
-    http_response_code($httpCode);
-    echo json_encode(['error' => 'An error occurred during the API request.']);
-}
 ?>
-
 

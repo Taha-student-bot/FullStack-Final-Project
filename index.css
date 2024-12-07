@@ -139,17 +139,19 @@ body {background-color: #f5f5ff;font-family: font-family: 'Lato', sans-serif!imp
 }
 
 #msform .action-button {
-  width: 170px;
-  background-color: var(--color-navy-100);
-  font-weight: bold;
-  color: white;
-  border: 0 none;
-  border-radius: 0px;
-  cursor: pointer;
-  padding: 20px 5px;
-  margin: 10px 0px 10px 5px;
-  float: right;
-  border-radius:34px;
+    width: 170px;
+    background-color: var(--color-navy-100);
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    margin: auto;
+    border-radius: 0px;
+    cursor: pointer;
+    padding: 20px 5px;
+    margin: 10px 0px 10px 5px;
+    /* float: right; */
+    border-radius: 34px;
+    margin: 80px auto;
 }
 
 #msform .action-button:hover,
@@ -158,17 +160,18 @@ body {background-color: #f5f5ff;font-family: font-family: 'Lato', sans-serif!imp
 }
 
 #msform .action-button-previous {
-  width: 170px;
-  background: #616161;
-  font-weight: bold;
-  color: white;
-  border: 0 none;
-  border-radius: 0px;
-  cursor: pointer;
-  padding: 20px 5px;
-  margin: 10px 5px 10px 0px;
-  float: right;
-  border-radius:34px;
+    width: 170px;
+    background: #616161;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 0px;
+    cursor: pointer;
+    padding: 20px 5px;
+    /* margin: 10px 5px 10px 0px; */
+    /* float: left; */
+    border-radius: 34px;
+    margin: auto;
 }
 
 #msform .action-button-previous:hover,
@@ -317,11 +320,12 @@ body {background-color: #f5f5ff;font-family: font-family: 'Lato', sans-serif!imp
     padding: 20px 30px;
     border-radius: 50px;
     margin-right: 20px;
-    color: #666666;
+    color: #fff;
+    background:#000080;
 }
 
-.rectangle-parent29 label.selected {border: 1px solid #000080;
-    color: #000080;
+.rectangle-parent29 label.selected, .rectangle-parent29 label:hover {border: 1px solid #000080;
+    color: #000080;border: 1px solid #000080; background:#fff;
 }
 
 .fade:not(.show) {opacity: 1!important}
